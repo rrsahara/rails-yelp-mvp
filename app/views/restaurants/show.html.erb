@@ -1,0 +1,25 @@
+<!-- /views/restaurants/show -->
+<div class="header" style="background-image: url('https://images.unsplash.com/photo-1558451043-6fdee9ba14de?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80/1400x800')">
+  <h2><%= @restaurant.name %></h2>
+  <p><%= @restaurant.address %></p>
+  <p><%= @restaurant.phone_number %></p>
+  <div class="back-button">
+    <%= link_to("<<< Back", restaurants_new_path)%>
+  </div>
+</div>
+<hr>
+<%= link_to("Write a Review",  restaurant_reviews_path(@restaurant)) %>
+<div>
+  <%= render 'reviews/form-review', id: 'new_review', restaurant: @restaurant, review: @review %>
+  <h1><%= @restaurant.name %> <small><%= @restaurant.address %></small></h1>
+<h2 id="counter">
+  <%= pluralize @restaurant.reviews.size, "review" %>
+</h2>
+</div>
+<hr>
+<h2 style="text-align: center;">Reviews</h2>
+<div id="reviews" class="main-container">
+  <% @restaurant.reviews.reverse_each do |review| %>
+      <%= render 'reviews/show', review: review %>
+  <% end %>
+</div>

@@ -1,0 +1,42 @@
+
+<div class="header", p-3 mb-2>
+  <h1>Honest Reviews</h1>
+  <h2>Please leave a reivew!</h2>
+  <%= link_to "Create A New Restaurant:", restaurants_new_path %>
+</div>
+<p style="text-align: center;">Restaurants Others Have Left a SHIT on:</p>
+
+<div class="main-container">
+  <!-- Redundant -->
+  <% def random_img %>
+    <% img_array = [] %>
+    <% img1 = "https://source.unsplash.com/user/geostablephl/200x200" %>
+    <% img2 = "https://source.unsplash.com/user/edguk/200x200" %>
+    <% img3 = "https://source.unsplash.com/user/eaterscollective/200x200" %>
+    <% img4 = "https://source.unsplash.com/user/chuttersnap/200x200" %>
+    <% img5 = "https://source.unsplash.com/user/moniqa/200x200" %>
+    <% img_array << img1 %>
+    <% img_array << img2 %>
+    <% img_array << img3 %>
+    <% img_array << img4 %>
+    <% img_array << img5 %>
+    <% img_array[rand(0...img_array.size)] %>
+  <% end %>
+
+  <% @restaurants.each do |restaurant| %>
+    <div class="restaurant-card" data-restaurant-id="<%= restaurant.id %>">
+      <div class="resaurant-card-top">
+        <img src="https://source.unsplash.com/user/moniqa/200x200?<%= rand %>">
+      </div>
+      <div class="restaurant-card-bottom">
+        <p id="restaurant-name"><%= restaurant.name %></p>
+        <p><%= restaurant.address %></p>
+        <p><%= restaurant.phone_number %></p>
+        <%= link_to("Reviews", restaurant_path(restaurant.id)) %>
+        <%= link_to "Delete", restaurant_path(restaurant), method: :delete, remote: true %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<p style="text-align: center;">THANK YOU!</p>
